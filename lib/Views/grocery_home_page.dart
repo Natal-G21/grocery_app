@@ -11,6 +11,13 @@ class GroceryHomePage extends StatefulWidget {
 }
 
 class _GroceryHomePageState extends State<GroceryHomePage> {
+  String catagory = '';
+  void filterProductByCatagory(String categoryName) {
+    setState(() {
+      catagory = categoryName;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,18 +111,51 @@ class _GroceryHomePageState extends State<GroceryHomePage> {
                           padding: EdgeInsets.only(right: 10),
                           child: GestureDetector(
                             onTap: () {
-                              // TODO 1: 
+                              filterProductByCatagory(
+                                groceryModel[index].name!,
+                              );
                             },
                             child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  width:
+                                      catagory == groceryModel[index].name
+                                          ? 2
+                                          : 1,
+                                ),
+                                color:
+                                    catagory == groceryModel[index].name
+                                        ? primaryColor
+                                        : seconderyColor,
+                              ),
                               child: Column(
                                 children: [
-                                  Image(
-                                    image: AssetImage(
-                                      groceryModel[index].image!,
+                                  Container(
+                                    height: 70,
+                                    width: 70,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: primaryColor,
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                          groceryModel[index].image!,
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                    width: 100,
                                   ),
-                                  Text(groceryModel[index].name!),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    groceryModel[index].name!,
+                                    style: TextStyle(
+                                      fontWeight:
+                                          catagory == groceryModel[index].name
+                                              ? FontWeight.bold
+                                              : FontWeight.w500,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -123,6 +163,39 @@ class _GroceryHomePageState extends State<GroceryHomePage> {
                         ),
                       ),
                     ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Find By Catagory",
+                        style: TextStyle(
+                          fontSize: 23,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        "See All",
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                      Icon(Icons.keyboard_arrow_left, color: Colors.black),
+                    ],
+                  ),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(groceryModel.length, (index) {
+                      return Padding(
+                        padding: EdgeInsets.only(left: 15, top: 15, bottom: 15),
+                        child: GestureDetector(
+                          
+                        ),
+                      );
+                    }),
                   ),
                 ),
               ],
