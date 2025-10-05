@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/Model/grocery_items.dart';
+import 'package:grocery_app/Utility/constants.dart';
 
 class GroceryItem extends StatelessWidget {
   final Groceryitems groceryitems;
@@ -50,6 +51,73 @@ class GroceryItem extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                  "\$",
+                style: const TextStyle(
+                  fontSize: 22,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: -1,
+                ),
+              ),
+              Text(
+                groceryitems.price ?? "0",
+                style: const TextStyle(
+                  fontSize: 22,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: -1,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: primaryColor
+                    ),
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(25),
+                      topRight: Radius.circular(30),
+                    )
+                  ),
+                  child: GestureDetector(
+                    onTap: (){},
+                    child: const Icon(Icons.favorite_border,size: 27,),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: const BoxDecoration(
+                    color: primaryColor,
+                    borderRadius: const BorderRadius.only(
+                      bottomRight: Radius.circular(25),
+                      topLeft: Radius.circular(30),
+                    )
+                  ),
+                  child: GestureDetector(
+                    onTap: (){},
+                    child: const Icon(Icons.shopping_cart,color: Colors.white,size: 27,),
+                  ),
+                ),
+              )
+            ],
+          )
         ],
       ),
     );
