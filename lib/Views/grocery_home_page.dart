@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/Model/catagory_model.dart';
 import 'package:grocery_app/Model/grocery_items.dart';
 import 'package:grocery_app/Utility/constants.dart';
+import 'package:grocery_app/Views/see_all_product.dart';
 import 'package:grocery_app/Widget/grocery_item.dart';
 import 'package:grocery_app/Widget/my_search_bar.dart';
 
@@ -65,7 +66,9 @@ class _GroceryHomePageState extends State<GroceryHomePage> {
                       ),
                       const Spacer(),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                         
+                        },
                         icon: const Icon(
                           Icons.shopping_cart_outlined,
                           size: 27,
@@ -103,12 +106,12 @@ class _GroceryHomePageState extends State<GroceryHomePage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
-                    children: const [
+                    children:  [
                       Text(
                         "Catagory",
                         style: TextStyle(
                           fontSize: 23,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       Spacer(),
@@ -191,28 +194,38 @@ class _GroceryHomePageState extends State<GroceryHomePage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
-                    children: const [
+                    children:  [
                       Text(
-                        "Catagory",
+                        "Tind By Catagory",
                         style: TextStyle(
                           fontSize: 23,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       Spacer(),
-                      Text(
-                        "See All",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        child: Text(
+                          "See All",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
+                        onTap: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SeeAllProduct(),
+                            ),
+                          );
+                        },
                       ),
                       Icon(Icons.keyboard_arrow_left, color: Colors.black),
                     ],
                   ),
                 ),
 
-                //catagory items list 
+                //catagory items list
                 groceryitem.isEmpty
                     ? const Center(
                       child: Padding(
@@ -237,16 +250,13 @@ class _GroceryHomePageState extends State<GroceryHomePage> {
                               bottom: 15,
                             ),
                             child: GestureDetector(
-                              onTap: (){
-
-                              },
+                              onTap: () {},
                               child: GroceryItem(
-                              groceryitems: groceryitem[index],
+                                groceryitems: groceryitem[index],
                               ),
                             ),
                           );
-                        }
-                        ),
+                        }),
                       ),
                     ),
               ],
