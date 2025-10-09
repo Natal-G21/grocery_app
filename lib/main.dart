@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/Model/catagory_model.dart';
+import 'package:grocery_app/Provider/cart_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:grocery_app/Provider/favorite_provider.dart';
 import 'package:grocery_app/Views/grocery_app_main_screen.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => FavoriteProvider()),
+         ChangeNotifierProvider(create: (_) => CartProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: GroceryAppMainScreen(),
     );
   }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/Model/grocery_items.dart';
 import 'package:grocery_app/Utility/constants.dart';
+import 'package:grocery_app/Views/favorite_screen.dart';
 import 'package:grocery_app/Views/grocery_home_page.dart';
 import 'package:iconsax/iconsax.dart';
 
 class GroceryAppMainScreen extends StatefulWidget {
-  const GroceryAppMainScreen({super.key});
+  GroceryAppMainScreen({super.key});
 
   @override
   State<GroceryAppMainScreen> createState() => _GroceryAppMainScreenState();
@@ -14,7 +16,7 @@ class _GroceryAppMainScreenState extends State<GroceryAppMainScreen> {
   int selectedIndex = 0;
   final List pages = [
     GroceryHomePage(),
-    const Scaffold(body: Center(child: Text('Favorite'))),
+    FavoriteScreen(),
     const Scaffold(body: Center(child: Text('Cart'))),
     const Scaffold(body: Center(child: Text('Profile'))),
   ];

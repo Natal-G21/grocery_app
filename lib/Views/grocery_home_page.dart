@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/Model/catagory_model.dart';
 import 'package:grocery_app/Model/grocery_items.dart';
 import 'package:grocery_app/Utility/constants.dart';
+import 'package:grocery_app/Views/item_details_screen.dart';
 import 'package:grocery_app/Views/see_all_product.dart';
+import 'package:grocery_app/Widget/cart_icon.dart';
 import 'package:grocery_app/Widget/grocery_item.dart';
 import 'package:grocery_app/Widget/my_search_bar.dart';
 
@@ -65,15 +67,7 @@ class _GroceryHomePageState extends State<GroceryHomePage> {
                         ),
                       ),
                       const Spacer(),
-                      IconButton(
-                        onPressed: () {
-                         
-                        },
-                        icon: const Icon(
-                          Icons.shopping_cart_outlined,
-                          size: 27,
-                        ),
-                      ),
+                      CartIcon()
                     ],
                   ),
                 ),
@@ -106,7 +100,7 @@ class _GroceryHomePageState extends State<GroceryHomePage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
-                    children:  [
+                    children: [
                       Text(
                         "Catagory",
                         style: TextStyle(
@@ -194,9 +188,9 @@ class _GroceryHomePageState extends State<GroceryHomePage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
-                    children:  [
+                    children: [
                       Text(
-                        "Tind By Catagory",
+                        "Find By Catagory",
                         style: TextStyle(
                           fontSize: 23,
                           fontWeight: FontWeight.bold,
@@ -212,7 +206,7 @@ class _GroceryHomePageState extends State<GroceryHomePage> {
                           ),
                         ),
                         onTap: () {
-                           Navigator.push(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => SeeAllProduct(),
@@ -250,7 +244,17 @@ class _GroceryHomePageState extends State<GroceryHomePage> {
                               bottom: 15,
                             ),
                             child: GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) => ItemDetailsScreen(
+                                          item: groceryitem[index],
+                                        ),
+                                  ),
+                                );
+                              },
                               child: GroceryItem(
                                 groceryitems: groceryitem[index],
                               ),

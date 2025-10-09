@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grocery_app/Model/grocery_items.dart';
 import 'package:grocery_app/Utility/constants.dart';
 import 'package:grocery_app/Views/grocery_home_page.dart';
+import 'package:grocery_app/Views/item_details_screen.dart';
 import 'package:grocery_app/Widget/grocery_item.dart';
 import 'package:grocery_app/Widget/my_search_bar.dart';
 
@@ -13,7 +14,6 @@ class SeeAllProduct extends StatefulWidget {
 }
 
 class _SeeAllProductState extends State<SeeAllProduct> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +42,7 @@ class _SeeAllProductState extends State<SeeAllProduct> {
               const SizedBox(height: 25),
               Expanded(
                 child: GridView.builder(
-                   itemCount: groceryitem.length,
+                  itemCount: groceryitem.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 15,
@@ -50,7 +50,19 @@ class _SeeAllProductState extends State<SeeAllProduct> {
                     childAspectRatio: 0.662,
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    return GroceryItem(groceryitems: groceryitem[index]);
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) =>
+                                    ItemDetailsScreen(item: groceryitem[index]),
+                          ),
+                        );
+                      },
+                      child: GroceryItem(groceryitems: groceryitem[index]),
+                    );
                   },
                 ),
               ),
