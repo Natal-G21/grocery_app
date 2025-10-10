@@ -6,7 +6,7 @@ class CartProvider with ChangeNotifier {
   List<CartModel> _carts = [];
   List<CartModel> get carts => _carts;
   set carts(List<CartModel> carts) {
-    carts = _carts;
+    _carts = carts;
     notifyListeners();
   }
 
@@ -23,11 +23,10 @@ class CartProvider with ChangeNotifier {
     }
     notifyListeners();
   }
-   bool productExist(Map<String, dynamic> grocery) {
-    return _carts.any(
-      (element) => element.grocery['id'] == grocery['id'],
-    );
-   }
+
+  bool productExist(Map<String, dynamic> grocery) {
+    return _carts.any((element) => element.grocery['id'] == grocery['id']);
+  }
 
   void addQuantity(Map<String, dynamic> grocery) {
     int index = _carts.indexWhere(
@@ -47,7 +46,9 @@ class CartProvider with ChangeNotifier {
     if (index != -1) {
       _carts[index].quantity = _carts[index].quantity - 1;
       notifyListeners();
-    } else if (index != -1 && _carts[index].quantity == 1) {}
+    } else {
+      _carts.removeAt(index);
+    }
 
     //cheek if product already exist in the cart
 
@@ -57,15 +58,16 @@ class CartProvider with ChangeNotifier {
           ) !=
           -1;
     }
-          //calculate total price of all item in the cart
-    void removeFromCart(Map<String, dynamic> grocery) {
-      int index = _carts.indexWhere(
-        (element) => element.grocery['id'] == grocery['id'],
-      );
-      if (index != -1) {
-        _carts.removeAt(index);
-        notifyListeners();
-      }
+  }
+
+  //calculate total price of all item in the cart
+  void removeFromCart(Map<String, dynamic> grocery) {
+    int index = _carts.indexWhere(
+      (element) => element.grocery['id'] == grocery['id'],
+    );
+    if (index != -1) {
+      _carts.removeAt(index);
+      notifyListeners();
     }
   }
 
@@ -78,6 +80,4 @@ class CartProvider with ChangeNotifier {
     }
     return total;
   }
-  
- 
 }

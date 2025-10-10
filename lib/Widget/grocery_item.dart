@@ -12,12 +12,13 @@ class GroceryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final provider = Provider.of<FavoriteProvider>(context);
     final favoriteItems = provider.favoriteItems;
     CartProvider cartProvider = Provider.of<CartProvider>(context);
     return Container(
       width: 192,
-      height: 340,
+      height: 260,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         gradient: const LinearGradient(
@@ -39,7 +40,7 @@ class GroceryItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: 150,
+            height: 120,
             width: double.maxFinite,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
